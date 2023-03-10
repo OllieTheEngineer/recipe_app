@@ -23,6 +23,12 @@ class User(db.Model):
         nullable=False,
         unique=True,
     )
+    
+    username = db.Column(
+        db.String(15),
+        nullable=False,
+        unique=True,
+    )
 
     first_name = db.Column(
         db.Text,
@@ -53,21 +59,23 @@ class Recipe(db.Model):
         primary_key=True,
     )
 
-    recipe_title = db.Column(
+    recipe_name = db.Column(
         db.Text,
         nullable=False,
     )
 
-    recipe_ingredients = db.Column(
+    ingredients = db.Column(
         db.String(500),
         nullable=False,
     )
 
-    recipe_instructions = db.Column(
+    instructions = db.Column(
         db.String(500),
         nullable=False,
     )
-
+    category = db.Column(
+        db.String
+    )
     recipe_image = db.Column(
         db.Text
     )
@@ -94,7 +102,30 @@ class Ingredients(db.Model):
         db.String(20),
         nullable=False
     )
-    ingredient = db.relationship('Ingredients')
+
+    description = db.Column(
+        db.String(100),
+        nullable=False
+    )
+    recipe = db.relationship('Recipes')
+
+
+class Category(db.Model):
+    """ Dietary preferences"""
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+        nullale=False
+    )
+
+    recipe_id = db.Column(
+        db.Integer,
+        foreign_kay=True,
+        nullable=False,
+    )
+
+
 
     def connect_db(app):
 

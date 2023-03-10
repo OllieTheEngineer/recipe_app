@@ -94,7 +94,7 @@ class Ingredients(db.Model):
         db.String(20),
         nullable=False
     )
-    ingredient = db.relationship(Ingredients)
+    ingredient = db.relationship('Ingredients')
 
     def connect_db(app):
 

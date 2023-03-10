@@ -74,16 +74,16 @@ class Recipe(db.Model):
         nullable=False,
     )
     category = db.Column(
-        db.String
+        db.String,
+        nullable=True,
     )
     recipe_image = db.Column(
-        db.Text
+        db.Text,
+        nullable=True,
     )
-
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey(''),
-        nullable=False
+        nullable=False,
     )
 
     user = db.relationship('User')
@@ -115,8 +115,8 @@ class Category(db.Model):
 
     id = db.Column(
         db.Integer,
-        primary_key=True
-        nullale=False
+        primary_key=True,
+        nullable=False,
     )
 
     recipe_id = db.Column(

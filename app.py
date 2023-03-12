@@ -11,7 +11,7 @@ app = Flask(__name__)
 # Get DB_URI from environ variable (useful for production/testing) or,
 # if not set there, use development local db.
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///recipes'))
+    os.environ.get('DATABASE_URL', 'postgresql:///recipes_db'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
@@ -48,14 +48,22 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
+
+##############################################################################################################
+# API Request
+
+resp = request.get('https://api.spoonacular.com/recipes/complexSearch?apiKey=ec5b8151d1ca4723963202741272cba1')
+
 @app.route('/')
 def homepage():
     """ Shows homepage """
 
     return render_template('home.html')
 
-@app.route('/user')
+@app.route('/user', methods=["GET"])
 def userpage():
     """userpage route"""
+
+    return render_template('recipe.html')
 
 # recipe page route

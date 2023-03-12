@@ -110,7 +110,7 @@ class Ingredients(db.Model):
     recipe = db.relationship('Recipes')
 
 
-class Category(db.Model):
+class Categories(db.Model):
     """ Dietary preferences"""
 
     id = db.Column(
@@ -119,15 +119,13 @@ class Category(db.Model):
         nullable=False,
     )
 
-    recipe_id = db.Column(
-        db.Integer,
-        foreign_kay=True,
+    category = db.Column(
+        db.String,
         nullable=False,
     )
 
 
 
-    def connect_db(app):
-
-        db.app = app
-        db.init_app(app)
+def connect_db(app):
+    db.app = app
+    db.init_app(app)

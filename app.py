@@ -19,6 +19,8 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
+API_SECRET_KEY = "ec5b8151d1ca4723963202741272cba1"
+
 
 connect_db(app)
 
@@ -52,7 +54,7 @@ def do_logout():
 ##############################################################################################################
 # API Request
 
-resp = request.get('https://api.spoonacular.com/recipes/complexSearch?apiKey=ec5b8151d1ca4723963202741272cba1')
+# resp = request.get('https://api.spoonacular.com/recipes/complexSearch?apiKey=ec5b8151d1ca4723963202741272cba1')
 
 @app.route('/')
 def homepage():
@@ -60,10 +62,15 @@ def homepage():
 
     return render_template('home.html')
 
-@app.route('/user', methods=["GET"])
-def userpage():
-    """userpage route"""
+@app.route('/search', methods=["GET"])
+def search():
+    """search route"""
+    recipes = request.args["recipes"]
+    res = request.get('https://api.spoonacular.com/recipes/complexSearch',
+                       params={"recipes": recipes, "key": API_SECRET_KEY})
+    
+    recipe_data = res.json
 
-    return render_template('recipe.html')
+    return render_template('recipe.html', recipe=recipe_data)
 
 # recipe page route

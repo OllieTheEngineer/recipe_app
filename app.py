@@ -4,7 +4,7 @@ from flask import Flask, render_template, flash, request, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from models import db, connect_db, User, Recipe
+from models import db, connect_db, User, Recipe, Ingredients, Category
 from forms import LoginForm, SignUpForm
 import requests
 
@@ -138,4 +138,41 @@ def search():
         return render_template('recipe.html', recipe=recipe_data, searches=search)
     else: 
         return render_template('recipe.html', recipe=[])
+    
+
+@app.route('/sandbox', methods=["GET"])
+def sandbox():
+
+    response = {}
+
+    users = User.query.all()
+    user_list = [{'username': user.username, 'first_name': user.first_name, 'last_name': user.last_name} for user in users]
+    print ("User")
+    print (user_list)
+    print()
+    response["user"] = user_list
+
+    categories = Category.query.all()
+    category_list = [{'category': category.name} for category in categories]
+    print ("Category")
+    print (category_list)
+    print()
+    response["category"] = category_list
+
+    recipes = Recipe.query.all()
+    recipe_list = [{'recipe_name': recipe.recipe_name, 'ingredient': recipe.ingredient, 'instruction': recipe.ingredient, 'category': recipe.category, 'image_url': recipe.image_url, 'username': recipe.user_username, 'category_id': recipe.category_id} for recipe in recipes]
+    print ("Recipe")
+    print (recipe_list)
+    print()
+    response["recipe"] = recipe_list
+
+    ingredients = Ingredients.query.all()
+    ingredient_list = [{'name': ingredient.name, 'description': ingredient.description, 'recipe_id': ingredient.recipe_id} for ingredient in ingredients]
+    print("Ingredients")
+    print (ingredient_list)
+    print()
+
+    response["ingredient"] = ingredient_list
+
+    return "Look in the terminal"
 

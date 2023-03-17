@@ -38,7 +38,7 @@ class User(db.Model):
         unique=True
     )
 
-class Categories(db.Model):
+class Category(db.Model):
     """ Dietary preferences"""
 
     id = db.Column(
@@ -46,8 +46,8 @@ class Categories(db.Model):
         primary_key=True,
     )
 
-    category = db.Column(
-        db.String,
+    name = db.Column(
+        db.Text,
         nullable=False,
     )
 

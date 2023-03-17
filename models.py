@@ -12,39 +12,43 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-    )
-
-    email = db.Column(
-        db.Text,
-        nullable=False,
-        unique=True,
-    )
-    
     username = db.Column(
         db.String(15),
-        nullable=False,
-        unique=True,
+        primary_key=True
     )
 
     first_name = db.Column(
         db.Text,
         nullable=False,
-        unique=False,
     )
 
     last_name = db.Column(
         db.Text,
         nullable=False,
-        unique=False,
     )
 
     password = db.Column(
         db.Text,
         nullable=False,
-        unique=True,
+    )
+
+    email = db.Column(
+        db.Text,
+        nullable=False,
+        unique=True
+    )
+
+class Categories(db.Model):
+    """ Dietary preferences"""
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True,
+    )
+
+    category = db.Column(
+        db.String,
+        nullable=False,
     )
 
 
@@ -58,17 +62,17 @@ class Recipe(db.Model):
         primary_key=True,
     )
 
-    title = db.Column(
+    recipe_name = db.Column(
         db.Text,
         nullable=False,
     )
 
-    ingredients = db.Column(
+    ingredient = db.Column(
         db.String(500),
         nullable=False,
     )
 
-    instructions = db.Column(
+    instruction = db.Column(
         db.String(500),
         nullable=False,
     )
@@ -78,16 +82,25 @@ class Recipe(db.Model):
         nullable=True,
     )
     
-    image = db.Column(
+    image_url = db.Column(
         db.Text,
         nullable=True,
     )
-    user_id = db.Column(
-        db.Integer,
+    user_username = db.Column(
+        db.String,
+        db.ForeignKey('users.username', ondelete='CASCADE'),
         nullable=False,
     )
 
-    user = db.relationship('User')
+    user = db.relationship("User", backref=db.backref('recipes', cascade='all.delete'))
+
+    category_id = db.Column(
+        db.Integer,
+        db.Foreign_key('categories.id'),
+        nullable=False,
+    )
+
+    category = db.relationship("Category", backref=db.backref('categories'))
 
 class Ingredients(db.Model):
     """ list of ingredients """
@@ -108,23 +121,16 @@ class Ingredients(db.Model):
         db.String(100),
         nullable=False
     )
-    recipe = db.relationship('Recipes')
-
-
-class Categories(db.Model):
-    """ Dietary preferences"""
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True,
-        nullable=False,
+    
+    recipe_id = db.Column(
+        db.Integer, 
+        db.ForeignKey(
+        'recipes.id', ondelete='CASCADE'), 
+        nullable=False
     )
-
-    category = db.Column(
-        db.String,
-        nullable=False,
-    )
-
+    
+    recipe = db.relationship('Recipe', backref=db.backref(
+        'ingredients', cascade='all,delete'))
 
 
 def connect_db(app):

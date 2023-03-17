@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/recipe.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@1,700&family=Open+Sans:ital,wght@1,400;1,800&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+    <h2> Please log in here to begin your search </h2>
+
+    <div>
+        <form action="/search" methods="POST">
+            {{ form.hidden_tag()}}
+            {% for field in form
+                if field.widget.input_type != 'hidden' %}
+
+                <p>
+                    {{ field.label }}
+                    {{ field }}
+
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </p>
+            {% endfor %}
+
+            <button type="submit"> Submit </button>
+        </form>
+    </div>
     
 </body>
 </html>

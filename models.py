@@ -3,7 +3,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from datetime import datetime
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
@@ -59,7 +58,7 @@ class Recipe(db.Model):
         primary_key=True,
     )
 
-    recipe_name = db.Column(
+    title = db.Column(
         db.Text,
         nullable=False,
     )
@@ -73,11 +72,13 @@ class Recipe(db.Model):
         db.String(500),
         nullable=False,
     )
+
     category = db.Column(
         db.String,
         nullable=True,
     )
-    recipe_image = db.Column(
+    
+    image = db.Column(
         db.Text,
         nullable=True,
     )

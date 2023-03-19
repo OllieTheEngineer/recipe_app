@@ -31,31 +31,27 @@
                 <h2 class="title"> Your Search Results:</h2>
                 <div id="meal">
 
-                    <div class="meal-item">
+                    <!-- <div class="meal-item">
                         <div class="meal-image">
                             <img src="{{recipe.image}}" width="100%">
-                        </div>
+                        </div> -->
                         <div class="meal-name">
-                            <h3>Recipe results for {{ searches }}</h3>
-                            {% if results %}
-                            <ul>
-                              {% for recipe in results %}
+                            <h3>Recipe results for {{ recipe.title }} </h3>
+                            {% if recipe %}
                                   <h2>{{ recipe.title }}</h2>
                                   {% if recipe.image %}
                                     <img src="{{ recipe.image }}" alt="{{ recipe.title }}" width="200" height="200">
-                                    <a href="/recipes/{{ recipe.id }}" class="recipe-btn"> Get Recipe</a>
                                   {% endif %}
                                   {% if recipe.instructions %}
                                     <h3>Instructions:</h3>
-                                    <ol>
-                                      {% for instruction in recipe.instructions %}
-                                        <li>{{ instruction }}</li>
-                                      {% endfor %}
-                                    </ol>
+                                    <div>
+                                        <p> Ready in {{ recipe.readyInMinutes }} mins! </p>
+                                        <p> Serving : {{ recipe.servings }} </p>
+                                        <p>{{ recipe.ingredients }}</p>
+                                        <p>{{ recipe.instructions }}</p>
+                                    </div>
                                   {% endif %}
-                              {% endfor %}
-                            </ul>
-                          {% else %}
+                            {% else %}
                             <p>No results found.</p>
                           {% endif %}
                         </div>

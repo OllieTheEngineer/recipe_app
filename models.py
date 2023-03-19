@@ -41,6 +41,8 @@ class User(db.Model):
 class Category(db.Model):
     """ Dietary preferences"""
 
+    __tablename__ = 'categories'
+
     id = db.Column(
         db.Integer,
         primary_key=True,
@@ -96,7 +98,7 @@ class Recipe(db.Model):
 
     category_id = db.Column(
         db.Integer,
-        db.Foreign_key('categories.id'),
+        db.ForeignKey('categories.id'),
         nullable=False,
     )
 
@@ -105,7 +107,7 @@ class Recipe(db.Model):
 class Ingredients(db.Model):
     """ list of ingredients """
 
-    __tablename__ = "ingredients"
+    __tablename__ = 'ingredients'
 
     id = db.Column(
         db.Integer,

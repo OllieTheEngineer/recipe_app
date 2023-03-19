@@ -23,7 +23,7 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
-API_SECRET_KEY = "ec5b8151d1ca4723963202741272cba1"
+API_SECRET_KEY = "d4bdce467cf94b428dbcfbbc2b656fc1"
 
 
 connect_db(app)
@@ -78,8 +78,8 @@ def signup():
             flash("Username already exists!!")
             return render_template('/signup.html', form=form)
         
-        do_login(user)
-        return redirect("/")
+        # do_login(user)
+        return redirect("/login")
     
     else:
         return render_template('login.html', form=form)
@@ -96,7 +96,12 @@ def login():
 
         if user:
             do_login(user)
-            return redirect('/')
+            return redirect('/search')
+        else:
+            print("Couldnt't find user")
+    else:
+        print("Could not validate form")
+        print(form.username.data, form.password.data)
     
     return render_template("login.html", form=form)
 
@@ -130,14 +135,39 @@ def search():
         search = request.form["search"]
         print(search)
         res = requests.get('https://api.spoonacular.com/recipes/complexSearch',
-                       params={"apiKey": API_SECRET_KEY, "query": search})
+                       params={"apiKey": API_SECRET_KEY, 
+                               "query": search, 
+                               "instructionsRequired": True, 
+                               "addRecipeInformation": True
+                               }
+                            )
     
         recipe_data = res.json()
-        print(recipe_data)
+        results = recipe_data["results"]
+        for recipes in results:
+            print(recipes["title"])
+            print(recipes["analyzedInstructions"])
+            print(recipes["summary"])
+            print()
 
-        return render_template('recipe.html', recipe=recipe_data, searches=search)
+        return render_template('recipe.html', recipe=recipe_data, searches=search, results=results )
     else: 
         return render_template('recipe.html', recipe=[])
+
+@app.route('/recipes/<int:recipe_id>', methods=["GET"])
+def recipeInfo(recipe_id):
+    """recipe route"""
+    """ API request"""
+    res = requests.get(f'https://api.spoonacular.com/recipes/{recipe_id}/information',
+                       params={"apiKey": API_SECRET_KEY,  
+                               "includeNutrition": True
+                               }
+                            )
+    
+    recipe_data = res.json()
+    return render_template('recipe_data.html', recipe=recipe_data)
+
+
     
 
 @app.route('/sandbox', methods=["GET"])

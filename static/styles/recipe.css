@@ -130,8 +130,9 @@ body{
     transition: all 0.4s linear;
 }
 
-.recipe-btn hover{
-    background: var(--tenne-tawny);
+.recipe-btn:hover{
+    background: black;
+    color: white;
 }
 
 @media screen and (min-width: 600px){

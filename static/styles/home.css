@@ -1,0 +1,36 @@
+body {
+    background-image: url('https://i.pinimg.com/originals/7c/b1/86/7cb18679659f791b1191bea97b74dfc0.jpg');
+    background-size: cover;
+    margin: 5;
+    padding: 5;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: xx-large;
+    font-style: italic;
+}
+
+h2{
+    color: white;
+}
+
+h4{
+    color: white;
+    text-align: center;
+}
+
+.nav-bar {
+    overflow: hidden;
+    margin-top: -10px;
+}
+
+button {
+    text-align: center;
+}
+
+button:hover {
+    background: black;
+    color: white;
+}

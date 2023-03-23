@@ -47,8 +47,12 @@
                                     <div>
                                         <p> Ready in {{ recipe.readyInMinutes }} mins! </p>
                                         <p> Serving : {{ recipe.servings }} </p>
-                                        <p>{{ recipe.ingredients }}</p>
-                                        <p>{{ recipe.instructions }}</p>
+                                        {% if recipe.analyzedInstructions %}
+                                        <!-- <ul>
+                                            <li> {{ recipe.ingredients }}</li>
+                                        </ul> -->
+                                        {{ recipe.instructions|safe }}
+                                        {% endif %}   
                                     </div>
                                   {% endif %}
                             {% else %}

@@ -38,7 +38,6 @@
                         <div class="meal-name">
                             <h3>Recipe results for {{ searches }}</h3>
                             {% if results %}
-                            <ul>
                               {% for recipe in results %}
                                   <h2>{{ recipe.title }}</h2>
                                   {% if recipe.image %}
@@ -47,14 +46,13 @@
                                   {% endif %}
                                   {% if recipe.instructions %}
                                     <h3>Instructions:</h3>
-                                    <ol>
                                       {% for instruction in recipe.instructions %}
-                                        <li>{{ instruction }}</li>
+                                     
+                                        <p>{{ instruction }}</p>
+                                      
                                       {% endfor %}
-                                    </ol>
                                   {% endif %}
                               {% endfor %}
-                            </ul>
                           {% else %}
                             <p>No results found.</p>
                           {% endif %}

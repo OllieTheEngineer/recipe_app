@@ -72,6 +72,7 @@ def signup():
                 email=form.email.data,
                 password=form.password.data,
             )
+            db.session.add(user)
             db.session.commit()
 
         except IntegrityError as e:
@@ -165,6 +166,7 @@ def recipeInfo(recipe_id):
                             )
     
     recipe_data = res.json()
+    print(recipe_data)
     return render_template('recipe_data.html', recipe=recipe_data)
 
 

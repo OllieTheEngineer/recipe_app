@@ -119,10 +119,10 @@ class Recipe(db.Model):
         nullable=False,
     )
 
-    category = db.Column(
-        db.String,
-        nullable=True,
-    )
+    # category = db.Column(
+    #     db.String,
+    #     nullable=True,
+    # )
     
     image_url = db.Column(
         db.Text,
@@ -134,7 +134,7 @@ class Recipe(db.Model):
         nullable=False,
     )
 
-    user = db.relationship("User", backref=db.backref('recipes', cascade='all.delete'))
+    user = db.relationship("User", backref=db.backref('recipes', cascade='all,delete'))
 
     category_id = db.Column(
         db.Integer,

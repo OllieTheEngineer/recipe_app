@@ -14,7 +14,7 @@
     <h2> Please log in here to begin your search </h2>
 
     <div>
-        <form action="/login" methods="POST" id="fill-out-form">
+        <form action="/login" method="POST" id="fill-out-form">
             {{ form.hidden_tag()}}
             {% for field in form
                 if field.widget.input_type != 'hidden' %}

@@ -45,7 +45,7 @@ def add_user_to_g():
 def do_login(user):
     """Log in user."""
 
-    session[CURR_USER_KEY] = user.id
+    session[CURR_USER_KEY] = user.username
 
 
 def do_logout():
@@ -105,6 +105,15 @@ def login():
         print(form.username.data, form.password.data)
     
     return render_template("login.html", form=form)
+
+
+@app.route('/logout')
+def logout():
+    """Logout user."""
+
+    do_logout()
+    flash("You have been logged out successfully!")
+    return redirect('/')
 
 ###########################################################################################################
 

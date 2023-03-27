@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/form.css') }}">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@1,700&family=Open+Sans:ital,wght@1,400;1,800&display=swap" rel="stylesheet"> -->
     <title>Sign Up form</title>
 </head>
 <body>
-    <h2> Please Create an Account</h2>
+    <h1> Please Create an Account</h1>
     <div>
-        <form action="/sign-up" id="sing-up-form" method="POST">
+        <form action="/sign-up" method="POST" id="fill-out-form">
             {{ form.hidden_tag() }} <!--add type=hidden form fields -->
           
             {% for field in form

@@ -30,14 +30,15 @@
 
             <div class="meal-results">
                 <h2 class="title"> Your Search Results:</h2>
+                {% if results %}
                 <div id="meal">
                     <div class="meal-item">
                         <div class="meal-image">
                             <img src="{{recipe.image}}" width="100%">
                         </div>
                         <div class="meal-name">
-                            <h3>Recipe results for {{ searches }}</h3>
-                            {% if results %}
+                            <h1>Recipe results for {{ searches }}</h1>
+                            
                               {% for recipe in results %}
                                   <h2>{{ recipe.title }}</h2>
                                   {% if recipe.image %}

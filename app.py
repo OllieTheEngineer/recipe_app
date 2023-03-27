@@ -83,7 +83,7 @@ def signup():
         return redirect("/login")
     
     else:
-        return render_template('login.html', form=form)
+        return render_template('signup.html', form=form)
 
 @app.route('/login', methods=["GET",  "POST"])
 def login():
@@ -107,16 +107,6 @@ def login():
     return render_template("login.html", form=form)
 
 ###########################################################################################################
-# serializing 
-
-def recipe_serialize(Recipe):
-    """ serializing a recipe SQLALchemy obt to dict """
-
-    return {
-        "title": Recipe.title,
-        "image": Recipe.image,
-    }
-
 
 ##############################################################################################################
 # Homepage and Search Route

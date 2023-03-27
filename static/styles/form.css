@@ -1,0 +1,48 @@
+body {
+    background-image: url('https://i.pinimg.com/originals/7c/b1/86/7cb18679659f791b1191bea97b74dfc0.jpg');
+    background-size: cover;
+    margin: 5;
+    padding: 5;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-size: xx-large;
+    font-style: italic;
+    text-align: center;
+}
+
+h2{
+    color: white;
+    text-align: center;
+}
+
+.nav-bar {
+    overflow: hidden;
+    margin-top: -10px;
+}
+
+button {
+    text-align: center;
+}
+
+button:hover {
+    background: black;
+    color: white;
+}
+
+p{
+    color:rgb(90, 86, 86)
+}
+
+#fill-out-form {
+    width: 500px;
+    padding: 50px;
+    box-sizing: border-box;
+    box-shadow: 10cm;
+    border-radius: 20%;
+    border: 2px solid rgb(133, 131, 131);
+    background-color: rgb(239, 243, 239);
+    
+}
